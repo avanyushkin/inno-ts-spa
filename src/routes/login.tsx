@@ -1,10 +1,7 @@
 "use client"
 
+import { LoginForm } from '@/components/LoginForm';
 import { createFileRoute } from '@tanstack/react-router'
-// import { useState } from 'react';
-// import { z } from 'zod';
-// import { useForm } from 'react-hook-form';
-
 
 export const Route = createFileRoute('/login')({
   component: RouteComponent,
@@ -16,8 +13,9 @@ function RouteComponent() {
   // const {password, setPassword} = useState<string>('');
   return (
     <>
-      {/* <FormField /> */}
-      <h2 className="text-3x1 font-bold underline">Login component</h2>
+      <div className="min-h-screen flex items-center justify-center p-4">
+        <LoginForm />
+      </div>
     </>
   );
 }

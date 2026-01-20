@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './App.css'
 import { routeTree } from './routeTree.gen';
 import { createRouter } from '@tanstack/react-router';
 import { RouterProvider } from '@tanstack/react-router';
