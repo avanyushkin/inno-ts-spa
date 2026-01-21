@@ -27,6 +27,7 @@ const LoginForm = () => {
     try {
       const data = await login (values.username, values.password);
       localStorage.setItem ("token", data.token);
+      localStorage.setItem ("user", JSON.stringify (data));
       navigate ({to: "/profile"});
     } catch (err) {
       form.setError ("password", {
