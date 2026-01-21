@@ -34,7 +34,7 @@ const LoginForm = () => {
       });
     }
   };
-  const {handleSubmit, control, formState: {isSubmitting}} = form;
+  const {formState: {isSubmitting}} = form;
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
