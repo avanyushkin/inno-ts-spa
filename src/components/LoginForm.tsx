@@ -5,7 +5,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { Link } from "@tanstack/react-router";
 const formSchema = z.object({
   email: z.string(),
   password: z.string().min(8, {
@@ -55,8 +55,11 @@ const LoginForm = () => {
               )}
             />
           </CardContent>
-          <CardFooter>
-            <Button className="w-full">Sign in</Button>
+          <CardFooter className = "flex gap-2">
+            <Button type = "submit" className = "flex-1">Sign in</Button>
+            <Button type = "button" variant = "outline" className = "flex-1">
+              <Link to = "/register">Register</Link>
+            </Button>
           </CardFooter>
         </Card>
       </form>

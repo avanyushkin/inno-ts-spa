@@ -3,9 +3,9 @@ import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 
 const RootLayout = () => (
   <>
-    <div>
+    {/* <div>
       <Link to="/">Home</Link>{' '}
-    </div>
+    </div> */}
     <hr />
     <Outlet />
     <TanStackRouterDevtools />
