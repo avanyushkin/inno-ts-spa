@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Camera, Calendar, Mail, MapPin } from "lucide-react";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { LogoutButton } from "@/components/LogoutButton";
 
 export default function ProfileHeader() {
   const { user } = useCurrentUser ();
@@ -42,6 +43,7 @@ export default function ProfileHeader() {
               </div>
             </div>
           </div>
+          <LogoutButton />
         </div>
       </CardContent>
     </Card>
