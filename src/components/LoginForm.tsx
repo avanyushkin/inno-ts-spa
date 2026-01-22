@@ -27,6 +27,7 @@ const LoginForm = () => {
     try {
       const data = await login (values.username, values.password);
       localStorage.setItem ("token", data.token);
+      localStorage.setItem ("user", JSON.stringify (data));
       navigate ({to: "/profile"});
     } catch (err) {
       form.setError ("password", {
@@ -34,7 +35,7 @@ const LoginForm = () => {
       });
     }
   };
-  const {handleSubmit, control, formState: {isSubmitting}} = form;
+  const {formState: {isSubmitting}} = form;
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>

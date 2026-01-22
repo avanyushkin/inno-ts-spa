@@ -1,11 +1,15 @@
+import ProfilePage from '@/components/profile-page/page'
 import { createFileRoute } from '@tanstack/react-router'
-export const Route = createFileRoute('/profile')({
+import { RequireAuth } from '@/components/auth/require-auth'
+
+export const Route = createFileRoute ('/profile')({
   component: Profile,
 })
+
 function Profile() {
   return (
-    <>
-      <h1>Profile</h1>
-    </>
+    <RequireAuth>
+      <ProfilePage />
+    </RequireAuth>
   );
 }
