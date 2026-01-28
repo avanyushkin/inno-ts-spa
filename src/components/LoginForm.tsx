@@ -6,13 +6,31 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { login } from "@/api/auth.ts";
+// import { login } from "@/api/auth.ts";
+import { useMutation } from "@apollo/client/react";
+import { LOGIN_MUTATION } from "@/graphql/mutations/auth";
 const formSchema = z.object({
   username: z.string().min(3, "username should be at least 3 characters."),
   password: z.string().min(8, {
     message: "Password must be at least 8 characters.",
   }),
 });
+type LoginResponse = {
+  login: {
+    id: number;
+    username: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    image: string;
+    token: string;
+  };
+};
+
+type LoginVariables = {
+  username: string;
+  password: string;
+};
 const LoginForm = () => {
   const navigate = useNavigate ();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -22,19 +40,34 @@ const LoginForm = () => {
       password: "",
     },
   });
-  const onSubmit = async (values: z.infer<typeof formSchema>) => { // add api auth
-   //console.log(values);
+  const [loginMutation] = useMutation<LoginResponse, LoginVariables>(
+  LOGIN_MUTATION
+);
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const data = await login (values.username, values.password);
-      localStorage.setItem ("token", data.token);
-      localStorage.setItem ("user", JSON.stringify (data));
-      navigate ({to: "/profile"});
-    } catch (err) {
-      form.setError ("password", {
+      const { data } = await loginMutation({
+        variables: {
+          username: values.username,
+          password: values.password,
+        },
+      });
+
+      if (!data) {
+        throw new Error("No data returned from login mutation");
+      }
+
+      localStorage.setItem("token", data.login.token);
+      localStorage.setItem("user", JSON.stringify(data.login));
+
+      navigate({ to: "/profile" });
+    } catch {
+      form.setError("password", {
         message: "invalid password or username",
       });
     }
   };
+
   const {formState: {isSubmitting}} = form;
   return (
     <Form {...form}>
