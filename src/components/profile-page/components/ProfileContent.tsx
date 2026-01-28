@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { Tasks } from "@/components/Tasks";
+import { WebSocketChat } from "@/components/WebSocketChat";
 
 export default function ProfileContent() {
   const { user } = useCurrentUser();
@@ -69,6 +70,14 @@ export default function ProfileContent() {
         </CardContent>
       </Card>
     </TabsContent>
+
+    <TabsContent value="chat" className="space-y-6">
+    <Card className="border-2">
+      <CardContent className="p-6">
+        <WebSocketChat />
+      </CardContent>
+    </Card>
+  </TabsContent>
 
       <TabsContent value="completed" className="space-y-6">
 
