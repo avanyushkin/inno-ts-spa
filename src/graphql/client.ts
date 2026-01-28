@@ -2,7 +2,7 @@ import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
 
 export const apolloClient = new ApolloClient({
   link: new HttpLink({
-    uri: "https://your-backend/graphql",
+    uri: "https://jsonplaceholder.typicode.com/graphql",
     headers: {
       Authorization: localStorage.getItem("token")
         ? `Bearer ${localStorage.getItem("token")}`

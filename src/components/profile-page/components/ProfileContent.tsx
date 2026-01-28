@@ -1,10 +1,10 @@
-import TaskCheckbox from "@/components/ui/task-checkbox";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { Tasks } from "@/components/Tasks";
 
 export default function ProfileContent() {
   const { user } = useCurrentUser();
@@ -63,12 +63,12 @@ export default function ProfileContent() {
       </TabsContent>
 
       <TabsContent value="tasks" className="space-y-6">
-        <Card className="border-2">
-          <CardContent className="p-6">
-            <TaskCheckbox />
-          </CardContent>
-        </Card>
-      </TabsContent>
+      <Card className="border-2">
+        <CardContent className="p-6">
+          <Tasks />
+        </CardContent>
+      </Card>
+    </TabsContent>
 
       <TabsContent value="completed" className="space-y-6">
 
