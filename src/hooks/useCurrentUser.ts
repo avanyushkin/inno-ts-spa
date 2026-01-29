@@ -14,7 +14,11 @@ export function useCurrentUser () {
   useEffect (() => {
     const stored = localStorage.getItem ("user");
     if (stored) {
-        setUser(JSON.parse(stored));
+        try {
+          setUser(JSON.parse(stored));
+        } catch {
+          setUser(null);
+        }
     }
   }, []);
   return {user, setUser};
