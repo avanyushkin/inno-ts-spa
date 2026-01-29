@@ -4,6 +4,7 @@ A modern frontend application built with React + TypeScript, featuring authentic
 The project follows best practices and includes unit, integration, and snapshot tests.
 
 ## Live Demo
+[inno-ts-spa](https://inno-ts-spa.netlify.app/)
 
 ## Tech Stack
 - Frontend: React, TypeScript
