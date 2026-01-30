@@ -34,7 +34,11 @@ npm install
 ```
 npm run dev
 ```
+
 ### 3. Run tests
 ```
 npm test
 ```
+
+## Tests
+<img width="642" height="283" alt="image" src="https://github.com/user-attachments/assets/4f27bc3d-60eb-4326-86f8-e911e3c12eed" />
