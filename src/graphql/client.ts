@@ -1,13 +1,21 @@
-import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
+import { ApolloClient, InMemoryCache, HttpLink, from } from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+
+const httpLink = new HttpLink({
+  uri: "https://rickandmortyapi.com/graphql",
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem("token");
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+});
 
 export const apolloClient = new ApolloClient({
-  link: new HttpLink({
-    uri: "https://jsonplaceholder.typicode.com/graphql",
-    headers: {
-      Authorization: localStorage.getItem("token")
-        ? `Bearer ${localStorage.getItem("token")}`
-        : "",
-    },
-  }),
+  link: from([authLink, httpLink]),
   cache: new InMemoryCache(),
 });
