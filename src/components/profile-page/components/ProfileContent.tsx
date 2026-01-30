@@ -15,7 +15,7 @@ export default function ProfileContent() {
     <Tabs defaultValue="personal" className="space-y-6">
       <TabsList className="grid w-full grid-cols-4">
         <TabsTrigger value="personal">Personal</TabsTrigger>
-        <TabsTrigger value="tasks">Tasks</TabsTrigger>
+        <TabsTrigger value="characters">Characters</TabsTrigger>
         <TabsTrigger value="chat">Chat</TabsTrigger>
         <TabsTrigger value="completed">Completed</TabsTrigger>
       </TabsList>
@@ -63,7 +63,7 @@ export default function ProfileContent() {
         </Card>
       </TabsContent>
 
-      <TabsContent value="tasks" className="space-y-6">
+      <TabsContent value="characters" className="space-y-6">
       <Card className="border-2">
         <CardContent className="p-6">
           <Tasks />
