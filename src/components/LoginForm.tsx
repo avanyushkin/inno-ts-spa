@@ -6,33 +6,19 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, useNavigate } from "@tanstack/react-router";
-// import { login } from "@/api/auth.ts";
 import { useMutation } from "@apollo/client/react";
 import { LOGIN_MUTATION } from "@/graphql/mutations/auth";
+import type { LoginResponse, LoginVariables } from "@/types/user";
+
 const formSchema = z.object({
   username: z.string().min(3, "username should be at least 3 characters."),
   password: z.string().min(8, {
     message: "Password must be at least 8 characters.",
   }),
 });
-type LoginResponse = {
-  login: {
-    id: number;
-    username: string;
-    email: string;
-    firstName: string;
-    lastName: string;
-    image: string;
-    token: string;
-  };
-};
 
-type LoginVariables = {
-  username: string;
-  password: string;
-};
 const LoginForm = () => {
-  const navigate = useNavigate ();
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -40,9 +26,10 @@ const LoginForm = () => {
       password: "",
     },
   });
+  
   const [loginMutation] = useMutation<LoginResponse, LoginVariables>(
-  LOGIN_MUTATION
-);
+    LOGIN_MUTATION
+  );
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
@@ -81,22 +68,27 @@ const LoginForm = () => {
       navigate({ to: "/profile" });
     } catch {
       form.setError("password", {
-        message: "inval password",
+        message: "Invalid username or password",
       });
     }
   };
 
-  const {formState: {isSubmitting}} = form;
+  const { formState: { isSubmitting } } = form;
+  
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <Card className="w-full max-w-sm">
           <CardHeader>
             <CardTitle className="text-2xl">Login</CardTitle>
-            <CardDescription>Enter your username below to login to your account.</CardDescription>
+            <CardDescription>
+              Enter your username below to login to your account.
+            </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-4">
-            <FormField control={form.control} name="username"
+            <FormField 
+              control={form.control} 
+              name="username"
               render={({ field }) => (
                 <FormItem className="grid gap-4">
                   <FormLabel>Username</FormLabel>
@@ -107,7 +99,9 @@ const LoginForm = () => {
                 </FormItem>
               )}
             />
-            <FormField control={form.control} name="password"
+            <FormField 
+              control={form.control} 
+              name="password"
               render={({ field }) => (
                 <FormItem className="grid gap-4">
                   <FormLabel>Password</FormLabel>
@@ -119,12 +113,12 @@ const LoginForm = () => {
               )}
             />
           </CardContent>
-          <CardFooter className = "flex gap-2">
-            <Button type = "submit" className = "flex-1" disabled = {isSubmitting}>
-              {isSubmitting ? "loading..." : "Sign in"}
+          <CardFooter className="flex gap-2">
+            <Button type="submit" className="flex-1" disabled={isSubmitting}>
+              {isSubmitting ? "Loading..." : "Sign in"}
             </Button>
-            <Button type = "button" variant = "outline" className = "flex-1">
-              <Link to = "/register">Register</Link>
+            <Button type="button" variant="outline" className="flex-1">
+              <Link to="/register">Register</Link>
             </Button>
           </CardFooter>
         </Card>
