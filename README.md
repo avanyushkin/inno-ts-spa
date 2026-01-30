@@ -6,6 +6,7 @@ The project follows best practices and includes unit, integration, and snapshot 
 ## Live Demo
 [inno-ts-spa](https://inno-ts-spa.netlify.app/)
 
+
 ## 🔑 Demo Credentials
 
 You can use the following credentials to log in to the app:
